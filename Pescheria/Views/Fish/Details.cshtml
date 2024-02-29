@@ -3,9 +3,7 @@
 }
 
 <div>
-    <ul>
-        <li>Name: @Model.Name</li>
-        <li>Price: @(Model.Price / 100)€</li>
-        <li>IsSeaFish: @(Model.IsSeaFish ? "Sea fish" : "No sea fish" )</li>
-    </ul>
+    <h2>@Model.Name (@(Model.IsSeaFish ? "Sea fish" : "No sea fish"))</h2>
+    <h3>Price: @(Model.Price / 100)€</h3>
+    <img src="/uploads/@Model.Image" />
 </div>
