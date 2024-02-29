@@ -1,0 +1,78 @@
+﻿@if (TempData["MessageSuccess"] is not null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["MessageSuccess"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["MessageError"] is not null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["MessageError"]
+    </div>
+}
+
+
+<h2>I nostri pesci</h2>
+
+@if (Model.Count == 0)
+{
+    <h3>Non ci sono pesci nel database</h3>
+} else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Di mare</th>
+                <th scope="col">Prezzo</th>
+                <th scope="col">Deleted</th>
+                <th scope="col">Azioni</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var fish in Model)
+            {
+                <tr>
+                    <td scope="col">@fish.FishId</td>
+                    <td scope="col">@fish.Name</td>
+                    <td scope="col">@fish.IsSeaFish</td>
+                    <td scope="col">@fish.Price</td>
+                    <td scope="col">@fish.DeletedAt</td>
+                    <td scope="col">
+                        <a class="btn btn-primary" asp-controller="Fish" asp-action="Details" asp-route-id="@fish.FishId">Dettagli</a>
+                        <a class="btn btn-warning" asp-controller="Fish" asp-action="Edit" asp-route-id="@fish.FishId">Modifica</a>
+                        <form style="display: inline" asp-controller="Fish" asp-action="SoftDelete" method="post">
+                            <input type="hidden" name="FishId" value="@fish.FishId" />
+                            <button type="submit" class="btn btn-danger">Soft Delete</button>
+                        </form>
+                        <a class="btn btn-danger" asp-controller="Fish" asp-action="Delete" asp-route-id="@fish.FishId">Delete</a>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-@fish.FishId">
+                            Delete modale
+                        </button>
+                        <div class="modal fade" id="modal-@fish.FishId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Sei sicuro?</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                        <form asp-controller="Fish" asp-action="Delete" method="post">
+                                            <input type="hidden" name="FishId" value="@fish.FishId" />
+                                            <button type="submit" class="btn btn-primary">Si elimina</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

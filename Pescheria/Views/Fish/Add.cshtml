@@ -1,0 +1,19 @@
+﻿@model Fish
+
+<form asp-controller="Fish" asp-action="Add" method="post" enctype="multipart/form-data">
+    <label asp-for="@Model.Name"></label>
+    <input type="text" asp-for="@Model.Name" /><br />
+
+    <label asp-for="@Model.IsSeaFish"></label>
+    <input type="checkbox" asp-for="@Model.IsSeaFish" /><br />
+
+    <label asp-for="@Model.Price"></label>
+    <input type="number" asp-for="@Model.Price" /><br />
+
+    <div class="mb-3">
+        <label for="formFile" class="form-label">Choose an image</label>
+        <input class="form-control" type="file" id="formFile" name="image">
+    </div>
+
+    <button class="btn btn-primary">Submit</button>
+</form>

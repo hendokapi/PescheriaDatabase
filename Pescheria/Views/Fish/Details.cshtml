@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Details page";
+}
+
+<div>
+    <ul>
+        <li>Name: @Model.Name</li>
+        <li>Price: @(Model.Price / 100)€</li>
+        <li>IsSeaFish: @(Model.IsSeaFish ? "Sea fish" : "No sea fish" )</li>
+    </ul>
+</div>

@@ -1,0 +1,16 @@
+﻿@model Fish
+
+<form asp-controller="Fish" asp-action="Edit" method="post">
+    <input type="hidden" asp-for="@Model.FishId" /><br />
+
+    <label asp-for="@Model.Name"></label>
+    <input type="text" asp-for="@Model.Name" /><br />
+
+    <label asp-for="@Model.IsSeaFish"></label>
+    <input type="checkbox" asp-for="@Model.IsSeaFish" value="true" /><br />
+
+    <label asp-for="@Model.Price"></label>
+    <input type="number" asp-for="@Model.Price" /><br />
+
+    <button class="btn btn-primary">Salva</button>
+</form>
